@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DDI Checker | DrugMirror</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "primary": "#1D9E75",
+              "on-primary": "#ffffff",
+              "secondary": "#0f172a",
+              "background": "#f8fafc",
+              "on-background": "#0f172a",
+              "surface": "#ffffff",
+              "on-surface": "#0f172a",
+              "surface-variant": "#f1f5f9",
+              "on-surface-variant": "#64748b",
+              "outline": "#e2e8f0",
+              "error": "#ef4444",
+              "on-error": "#ffffff",
+              "teal-accent": "#14b8a6"
+            },
+            "borderRadius": {
+              "DEFAULT": "4px",
+              "lg": "6px",
+              "xl": "8px",
+              "full": "9999px"
+            },
+            "fontFamily": {
+              "headline": ["Manrope", "sans-serif"],
+              "body": ["Manrope", "sans-serif"],
+              "label": ["Manrope", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .gradient-subtle {
+        background: linear-gradient(135deg, #1D9E75 0%, #14b8a6 100%);
+      }
+      #results-grid {
+        opacity: 0;
+        transform: translateY(2rem);
+        transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        pointer-events: none;
+      }
+      #results-grid.visible {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body min-h-screen selection:bg-primary/20">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-outline">
+<div class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto">
+<div class="text-2xl font-headline font-extrabold tracking-tighter text-secondary cursor-pointer" onclick="window.location.href='index.html'">Drug<span class="text-primary">Mirror</span></div>
+<div class="hidden md:flex items-center gap-x-8 font-headline font-semibold text-sm">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="index.html">Home</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="analyzer.html">Analyzer</a>
+<a class="text-primary border-b-2 border-primary pb-1" href="ddi.html">DDI Checker</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="about.html">About</a>
+</div>
+<button class="bg-secondary hover:bg-slate-800 text-white px-6 py-2 rounded-lg font-bold transition-all active:scale-95 duration-200 text-sm" onclick="window.location.href='analyzer.html'">
+            Analyze
+        </button>
+</div>
+</nav>
+<main class="pt-32 pb-20 px-6 max-w-[1440px] mx-auto">
+<!-- Hero Section -->
+<header class="mb-16 text-center md:text-left">
+<h1 class="text-5xl md:text-6xl font-headline font-extrabold tracking-tight mb-4 text-secondary">
+            DDI <span class="text-primary">Checker</span>
+</h1>
+<p class="text-on-surface-variant text-lg max-w-2xl font-medium leading-relaxed">
+            Utilize our proprietary Molecular Luminescence engine to predict drug-drug interactions with clinical-grade accuracy.
+        </p>
+</header>
+<!-- Input Section -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+<!-- Patient ID -->
+<div class="bg-white border border-outline rounded-lg p-8 transition-all duration-300 shadow-sm">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">person</span>
+<label class="text-xs font-label font-bold tracking-widest uppercase text-on-surface-variant">Patient ID</label>
+</div>
+<div class="relative">
+<select id="patient-id" class="w-full bg-surface-variant border-none rounded-lg p-4 text-secondary text-sm focus:ring-2 focus:ring-primary/20 transition-all font-semibold">
+  <option value="patient001">patient001 — Metformin + Warfarin</option>
+  <option value="patient002">patient002 — Aspirin + Atorvastatin</option>
+  <option value="patient003">patient003 — Lisinopril + Metoprolol + Furosemide</option>
+</select>
+</div>
+<p class="mt-4 text-xs text-on-surface-variant">These are the three demo patient profiles loaded in the backend.</p>
+</div>
+<!-- New Drug -->
+<div class="bg-white border border-outline rounded-lg p-8 transition-all duration-300 shadow-sm">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-teal-accent">medication</span>
+<label class="text-xs font-label font-bold tracking-widest uppercase text-on-surface-variant">New Drug to Add</label>
+</div>
+<div class="relative">
+<input id="new-drug" type="text" value="Aspirin"
+  class="w-full bg-surface-variant border-none rounded-lg p-4 text-secondary text-sm focus:ring-2 focus:ring-teal-accent/20 transition-all"
+  placeholder="e.g. Ibuprofen, Aspirin, Penicillin" />
+</div>
+<p class="mt-4 text-xs text-on-surface-variant">Name of the proposed new medication to add to this patient's regimen.</p>
+</div>
+</section>
+<!-- Error Banner -->
+<div id="ddi-error" class="hidden mb-8 flex items-start gap-3 p-5 bg-red-50 text-red-700 rounded-lg border border-red-200">
+  <span class="material-symbols-outlined mt-0.5">error</span>
+  <p id="ddi-error-msg" class="text-sm font-semibold"></p>
+</div>
+<!-- Action Button -->
+<div class="flex justify-center mb-16">
+<button id="check-btn" class="gradient-subtle text-white px-12 py-5 rounded-lg text-lg font-headline font-bold shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all active:scale-95 group">
+<div class="flex items-center gap-3">
+  <span id="btn-text">Check Interactions</span>
+  <span id="btn-icon" class="material-symbols-outlined group-hover:translate-x-1 transition-transform">bolt</span>
+</div>
+</button>
+</div>
+<!-- Results Bento Grid -->
+<section id="results-grid" class="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
+<!-- Current Medications (Span 4) -->
+<div class="md:col-span-4 glass-card rounded-lg p-8 flex flex-col justify-between">
+<div>
+<h3 class="text-on-surface-variant text-xs font-label font-bold tracking-widest uppercase mb-6">Current Medications</h3>
+<div id="med-count" class="text-6xl font-headline font-extrabold text-secondary mb-2">—</div>
+<p class="text-on-surface-variant text-sm font-medium">Drugs already in this patient's regimen.</p>
+<div id="med-list" class="mt-4 flex flex-col gap-2"><!-- pills rendered by JS --></div>
+</div>
+<div class="mt-8 flex gap-2">
+<div class="h-1.5 flex-1 bg-primary rounded-full"></div>
+<div class="h-1.5 flex-1 bg-primary/40 rounded-full"></div>
+<div class="h-1.5 flex-1 bg-primary/10 rounded-full"></div>
+</div>
+</div>
+<!-- Risk Level (Span 4) -->
+<div id="risk-card" class="md:col-span-4 glass-card rounded-lg p-8 relative overflow-hidden flex flex-col items-center justify-center text-center">
+<div id="risk-icon-wrap" class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center mb-4">
+  <span id="risk-icon" class="material-symbols-outlined text-on-surface-variant text-3xl">shield</span>
+</div>
+<span id="risk-pill" class="px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-4 bg-surface-container text-on-surface-variant">—</span>
+<h3 id="risk-label" class="text-2xl font-headline font-extrabold text-secondary">Awaiting Analysis</h3>
+</div>
+<!-- Warning (Span 4) -->
+<div class="md:col-span-4 bg-white border border-outline rounded-lg p-8 flex flex-col shadow-sm">
+<div class="flex items-center gap-3 mb-4">
+  <span class="material-symbols-outlined text-on-surface-variant">notification_important</span>
+  <h3 class="text-xs font-label font-bold tracking-widest uppercase text-on-surface-variant">Interaction Warning</h3>
+</div>
+<p id="warning-text" class="text-on-surface text-sm leading-relaxed mt-2 flex-1">Run the safety check to see the interaction summary for this patient.</p>
+</div>
+<!-- Conflict Detail (Span 12) -->
+<div id="conflict-detail" class="md:col-span-12 glass-card rounded-lg p-10 hidden">
+<div class="flex items-center gap-4 mb-8">
+<span class="material-symbols-outlined text-primary p-3 bg-primary/5 rounded-lg">emergency_home</span>
+<h3 class="text-xl font-headline font-extrabold text-secondary">Safety Assessment Summary</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+  <div>
+    <div class="text-[10px] font-extrabold text-on-surface-variant uppercase tracking-widest mb-3">Proposed Addition</div>
+    <p id="conflict-drug" class="text-on-surface text-lg font-bold">—</p>
+  </div>
+  <div>
+    <div class="text-[10px] font-extrabold text-on-surface-variant uppercase tracking-widest mb-3">Risk Assessment</div>
+    <p id="conflict-risk" class="text-on-surface text-lg font-bold">—</p>
+  </div>
+  <div class="md:col-span-2">
+    <div class="text-[10px] font-extrabold text-on-surface-variant uppercase tracking-widest mb-3">Clinical Note</div>
+    <p id="conflict-warning" class="text-on-surface text-base leading-relaxed">—</p>
+  </div>
+</div>
+</div>
+</section>
+</main>
+
+<script>
+  const API_BASE   = 'http://127.0.0.1:8000';
+  const checkBtn   = document.getElementById('check-btn');
+  const resultsGrid = document.getElementById('results-grid');
+  const btnText    = document.getElementById('btn-text');
+  const btnIcon    = document.getElementById('btn-icon');
+  const errBanner  = document.getElementById('ddi-error');
+  const errMsg     = document.getElementById('ddi-error-msg');
+
+  // ── Helpers ──────────────────────────────────────────────────────────────
+  const RISK_STYLES = {
+    HIGH:     { bg: 'bg-red-50',     border: 'border-red-200',    icon: 'warning',  iconColor: 'text-red-500',    pillBg: 'bg-red-500',    pillText: 'text-white',        label: 'High Risk'    },
+    MODERATE: { bg: 'bg-yellow-50',  border: 'border-yellow-200', icon: 'info',     iconColor: 'text-yellow-500', pillBg: 'bg-yellow-400', pillText: 'text-yellow-900',   label: 'Moderate Risk' },
+    LOW:      { bg: 'bg-green-50',   border: 'border-green-200',  icon: 'check_circle', iconColor: 'text-green-500', pillBg: 'bg-green-500', pillText: 'text-white',     label: 'Low Risk'     },
+  };
+
+  function applyRiskCard(level) {
+    const s = RISK_STYLES[level] || RISK_STYLES.LOW;
+    const card = document.getElementById('risk-card');
+    card.className = `md:col-span-4 ${s.bg} border ${s.border} rounded-lg p-8 relative overflow-hidden flex flex-col items-center justify-center text-center`;
+    document.getElementById('risk-icon-wrap').className = `w-16 h-16 rounded-full ${s.pillBg}/10 flex items-center justify-center mb-4`;
+    document.getElementById('risk-icon').className = `material-symbols-outlined ${s.iconColor} text-3xl`;
+    document.getElementById('risk-icon').textContent  = s.icon;
+    document.getElementById('risk-pill').className  = `px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-4 ${s.pillBg} ${s.pillText}`;
+    document.getElementById('risk-pill').textContent = level;
+    document.getElementById('risk-label').textContent = s.label;
+  }
+
+  function setLoading(on) {
+    errBanner.classList.add('hidden');
+    if (on) {
+      btnText.innerText = 'PROCESSING…';
+      btnIcon.innerText = 'sync';
+      btnIcon.classList.add('animate-spin');
+      checkBtn.classList.add('brightness-75', 'pointer-events-none');
+      resultsGrid.classList.remove('visible');
+    } else {
+      btnIcon.classList.remove('animate-spin');
+      checkBtn.classList.remove('brightness-75');
+      setTimeout(() => checkBtn.classList.remove('pointer-events-none'), 400);
+    }
+  }
+
+  function showDDIError(msg) {
+    errMsg.textContent = msg;
+    errBanner.classList.remove('hidden');
+    btnText.innerText = 'CHECK FAILED — Try Again';
+    btnIcon.innerText = 'error';
+  }
+
+  function renderResults(data, newDrug) {
+    // Medications
+    const meds = data.patient_medications || [];
+    document.getElementById('med-count').textContent = meds.length;
+    document.getElementById('med-list').innerHTML = meds.map(m =>
+      `<span class="inline-block px-3 py-1 bg-surface-variant rounded-full text-xs font-bold text-secondary">${m}</span>`
+    ).join('');
+
+    // Risk card
+    applyRiskCard(data.risk_level);
+
+    // Warning
+    document.getElementById('warning-text').textContent = data.interaction_warning;
+
+    // Conflict detail section
+    document.getElementById('conflict-detail').classList.remove('hidden');
+    document.getElementById('conflict-drug').textContent = newDrug;
+    document.getElementById('conflict-risk').textContent = data.risk_level;
+    document.getElementById('conflict-warning').textContent = data.interaction_warning;
+
+    // Show grid
+    resultsGrid.classList.add('visible');
+    btnText.innerText = 'CHECK COMPLETE';
+    btnIcon.innerText = 'done_all';
+  }
+
+  // ── Click handler ─────────────────────────────────────────────────────────
+  checkBtn.addEventListener('click', async () => {
+    const patientId = document.getElementById('patient-id').value.trim();
+    const newDrug   = document.getElementById('new-drug').value.trim();
+
+    if (!newDrug) {
+      showDDIError('Please enter a drug name before checking interactions.');
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const res = await fetch(`${API_BASE}/check_patient_safety`, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ patient_id: patientId, new_drug: newDrug }),
+      });
+
+      const data = await res.json();
+      setLoading(false);
+
+      if (!res.ok) {
+        showDDIError(data?.detail || `Server error ${res.status}`);
+        return;
+      }
+
+      renderResults(data, newDrug);
+
+    } catch (err) {
+      setLoading(false);
+      if (err instanceof TypeError) {
+        showDDIError('Cannot reach backend. Make sure the server is running on http://127.0.0.1:8000');
+      } else {
+        showDDIError(`Unexpected error: ${err.message}`);
+      }
+    }
+  });
+</script>
+</body></html>

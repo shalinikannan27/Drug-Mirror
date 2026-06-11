@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary": "#1D9E75",
+            "on-primary": "#ffffff",
+            "primary-container": "#e6f4f0",
+            "on-primary-container": "#002116",
+            "secondary": "#4a635d",
+            "on-secondary": "#ffffff",
+            "tertiary": "#40637b",
+            "on-tertiary": "#ffffff",
+            "background": "#ffffff",
+            "on-background": "#191c1b",
+            "surface": "#f8faf9",
+            "on-surface": "#191c1b",
+            "surface-variant": "#dae5e1",
+            "on-surface-variant": "#3f4946",
+            "outline": "#707976",
+            "outline-variant": "#bfc9c4"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "fontFamily": {
+            "headline": ["Manrope", "sans-serif"],
+            "body": ["Manrope", "sans-serif"],
+            "label": ["Manrope", "sans-serif"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .editorial-border {
+      border-top: 1px solid #bfc9c4;
+      padding-top: 2rem;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .text-gradient-primary {
+      color: #1D9E75;
+    }
+    .hover-lift {
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .hover-lift:hover {
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar Navigation Shell -->
+<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-outline-variant">
+<div class="flex justify-between items-center px-8 py-5 max-w-[1440px] mx-auto">
+<div class="text-xl font-extrabold tracking-tight text-primary font-headline">DrugMirror</div>
+<div class="hidden md:flex items-center gap-10">
+<a class="text-sm font-semibold tracking-tight text-on-surface-variant hover:text-primary transition-colors" href="#">Home</a>
+<a class="text-sm font-semibold tracking-tight text-on-surface-variant hover:text-primary transition-colors" href="#">Analyzer</a>
+<a class="text-sm font-semibold tracking-tight text-on-surface-variant hover:text-primary transition-colors" href="#">DDI Checker</a>
+<a class="text-sm font-bold tracking-tight text-primary border-b-2 border-primary" href="#">About</a>
+</div>
+<button class="bg-primary text-on-primary px-7 py-2.5 rounded-sm text-sm font-bold tracking-tight hover:bg-primary/90 transition-all">
+        Analyze
+      </button>
+</div>
+</nav>
+<main class="pt-40 pb-24">
+<!-- Hero Section -->
+<section class="max-w-[1440px] mx-auto px-8 mb-40">
+<div class="max-w-5xl">
+<h1 class="font-headline text-7xl md:text-8xl font-extrabold tracking-tight mb-10 leading-[1.05] text-on-background">
+          Precision <span class="text-primary">Molecular</span> Intelligence.
+        </h1>
+<p class="text-xl md:text-2xl text-on-surface-variant max-w-3xl font-medium leading-relaxed">
+          Pioneering the intersection of deep learning and medicinal chemistry to accelerate drug discovery with unparalleled transparency and clinical-grade accuracy.
+        </p>
+</div>
+</section>
+<!-- Trust Badges -->
+<section class="max-w-[1440px] mx-auto px-8 mb-32">
+<div class="flex flex-wrap gap-8 items-center">
+<div class="flex items-center gap-3 py-1">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="database">database</span>
+<span class="font-headline font-bold text-xs uppercase tracking-widest text-on-surface">BindingDB Verified</span>
+</div>
+<div class="flex items-center gap-3 py-1">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="visibility">visibility</span>
+<span class="font-headline font-bold text-xs uppercase tracking-widest text-on-surface">SHAP Explainability</span>
+</div>
+<div class="flex items-center gap-3 py-1">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="school">school</span>
+<span class="font-headline font-bold text-xs uppercase tracking-widest text-on-surface">Peer-Reviewed</span>
+</div>
+</div>
+</section>
+<!-- How It Works Flow -->
+<section class="max-w-[1440px] mx-auto px-8 mb-48">
+<div class="mb-16 editorial-border">
+<h2 class="font-headline text-2xl font-extrabold tracking-tight text-on-background">Architecting Discovery</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+<!-- Step 1 -->
+<div class="flex flex-col group">
+<div class="text-primary font-extrabold font-headline text-4xl mb-6">01</div>
+<h3 class="font-headline font-bold text-lg mb-4 text-on-background">SMILES Input</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed font-medium">Input simplified molecular-input line-entry system notation for high-throughput screening.</p>
+</div>
+<!-- Step 2 -->
+<div class="flex flex-col group">
+<div class="text-primary font-extrabold font-headline text-4xl mb-6">02</div>
+<h3 class="font-headline font-bold text-lg mb-4 text-on-background">Feature Extraction</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed font-medium">Advanced graph neural networks decompose chemical structures into spatial latent embeddings.</p>
+</div>
+<!-- Step 3 -->
+<div class="flex flex-col group">
+<div class="text-primary font-extrabold font-headline text-4xl mb-6">03</div>
+<h3 class="font-headline font-bold text-lg mb-4 text-on-background">ML Prediction</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed font-medium">Cross-referenced against multi-terabyte pharmaceutical datasets for affinity forecasting.</p>
+</div>
+<!-- Step 4 -->
+<div class="flex flex-col group">
+<div class="text-primary font-extrabold font-headline text-4xl mb-6">04</div>
+<h3 class="font-headline font-bold text-lg mb-4 text-on-background">Risk Profile</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed font-medium">Comprehensive toxicity and adverse interaction reports generated with explainable AI markers.</p>
+</div>
+</div>
+</section>
+<!-- Mission Split Layout -->
+<section class="max-w-[1440px] mx-auto px-8">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+<div class="space-y-10">
+<h2 class="font-headline text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.1] text-on-background">
+            Bridging the gap between <br/><span class="text-tertiary">Data &amp; Patient Safety.</span>
+</h2>
+<div class="space-y-6 text-on-surface-variant font-medium leading-relaxed text-lg">
+<p>
+              At DrugMirror, our mission is to eliminate the 'black box' of pharmaceutical drug discovery. By combining rigorous scientific integrity with cutting-edge machine learning, we provide researchers with tools that are as intuitive as they are powerful.
+            </p>
+<p>
+              Our platform doesn't just predict outcomes; it explains them. Through SHAP (SHapley Additive exPlanations), we pinpoint exactly which molecular features contribute to a risk profile.
+            </p>
+</div>
+<div class="pt-6 flex gap-16 editorial-border">
+<div>
+<p class="text-4xl font-extrabold text-primary font-headline tracking-tighter">99.2%</p>
+<p class="text-[10px] uppercase font-extrabold tracking-[0.2em] text-on-surface-variant mt-2">Validation Accuracy</p>
+</div>
+<div>
+<p class="text-4xl font-extrabold text-tertiary font-headline tracking-tighter">2.4M+</p>
+<p class="text-[10px] uppercase font-extrabold tracking-[0.2em] text-on-surface-variant mt-2">Molecular Pairs</p>
+</div>
+</div>
+</div>
+<div class="relative">
+<div class="aspect-square bg-surface border border-outline-variant overflow-hidden">
+<img alt="High-tech pharmaceutical laboratory" class="object-cover w-full h-full brightness-[1.02] contrast-[0.98] transition-all duration-700" data-alt="Minimalist, bright, clinical pharmaceutical laboratory environment with professional glass apparatus" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC54AqzRbbG4Zv89gasvdBLopp2gzDig5AmqzRoBBplHUBJlJ5VRDTPVmkIXX2DIX2QgRxP4SIzzYc3rqY1dgusIQRmGnRBYsSMT9MKCCDqaJNieOreTRk4-NSdezaiAecGr5wxMJCCjyOfwlP0Zmx2v81N6-ED8Mq_-2tckVRgKmfuSIGY4ttdKm6_N7c4hnOhdDe5D91On2Monj4L0LST2Vk6gcqPXWw8jxzyMJdlYx-TdJhLxVpWbRC67TzxNiZKSy_GZKcrIwd7"/>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Shell -->
+<footer class="w-full py-16 px-8 border-t border-outline-variant bg-white">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-[1440px] mx-auto">
+<div class="col-span-1 md:col-span-2">
+<div class="text-2xl font-extrabold text-on-background mb-4 font-headline">DrugMirror</div>
+<p class="text-sm font-medium text-on-surface-variant max-w-sm leading-relaxed">Empowering clinical research through explainable AI and molecular intelligence. Built for scientific integrity.</p>
+<p class="mt-8 text-[10px] text-outline font-bold tracking-[0.2em] uppercase">Molecular Luminescence System v2.4</p>
+</div>
+<div>
+<h4 class="text-on-background font-headline font-bold text-xs uppercase tracking-widest mb-6">Resources</h4>
+<div class="flex flex-col gap-4">
+<a class="text-on-surface-variant hover:text-primary transition-colors text-sm font-semibold" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-sm font-semibold" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-sm font-semibold" href="#">API Documentation</a>
+</div>
+</div>
+<div class="flex flex-col items-start md:items-end justify-between">
+<div class="flex gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+</a>
+<a class="text-on-surface-variant hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dataset">dataset</span>
+</a>
+</div>
+<div class="text-on-background font-bold text-sm tracking-tight mt-12 md:mt-0">DrugMirror © 2024</div>
+</div>
+</div>
+</footer>
+</body></html>

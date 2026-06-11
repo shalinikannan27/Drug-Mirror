@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#1D9E75",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#D1F0E4",
+                        "on-primary-container": "#002116",
+                        "secondary": "#4E6359",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#D1E8DB",
+                        "on-secondary-container": "#0B1F17",
+                        "tertiary": "#3F6374",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#C2E8FB",
+                        "on-tertiary-container": "#001E2B",
+                        "error": "#BA1A1A",
+                        "on-error": "#ffffff",
+                        "error-container": "#FFDAD6",
+                        "on-error-container": "#410002",
+                        "background": "#FBFDF9",
+                        "on-background": "#191C1A",
+                        "surface": "#FBFDF9",
+                        "on-surface": "#191C1A",
+                        "surface-variant": "#DBE5DE",
+                        "on-surface-variant": "#404944",
+                        "outline": "#707973",
+                        "outline-variant": "#BFC9C2",
+                        "surface-container-lowest": "#FFFFFF",
+                        "surface-container-low": "#F5F7F3",
+                        "surface-container": "#EFF1ED",
+                        "surface-container-high": "#E9EBE8",
+                        "surface-container-highest": "#E4E6E2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope", "sans-serif"],
+                        "body": ["Manrope", "sans-serif"],
+                        "label": ["Manrope", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .clinical-card {
+            background: #FFFFFF;
+            border: 1px solid #E4E6E2;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary/20">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-surface-container-highest">
+<div class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto">
+<div class="text-2xl font-headline font-extrabold tracking-tighter text-primary">DrugMirror</div>
+<div class="hidden md:flex gap-10 items-center font-headline font-semibold text-sm">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Home</a>
+<a class="text-primary border-b-2 border-primary pb-1" href="#">Analyzer</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">DDI Checker</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">About</a>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded font-bold hover:brightness-110 active:scale-95 transition-all">
+                Analyze
+            </button>
+</div>
+</nav>
+<main class="pt-28 pb-20 px-8 max-w-[1440px] mx-auto">
+<!-- Header with Action -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
+<div>
+<h1 class="text-5xl font-headline font-extrabold tracking-tight text-on-surface mb-3">Molecular Analyzer</h1>
+<p class="text-on-surface-variant text-lg max-w-2xl leading-relaxed">Clinical-grade deep learning structural analysis and binding risk prediction for pharmaceutical molecules.</p>
+</div>
+<button class="flex items-center gap-2 px-5 py-2.5 border border-outline rounded text-on-surface hover:bg-surface-container-low transition-colors font-semibold">
+<span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+<span>Export Analysis</span>
+</button>
+</div>
+<!-- Main Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+<!-- Left Panel: Input & 2D Drawing -->
+<div class="lg:col-span-5 space-y-8">
+<div class="clinical-card rounded-lg p-8">
+<label class="block text-xs font-bold text-on-surface-variant mb-4 uppercase tracking-widest">Input SMILES Sequence</label>
+<textarea class="w-full h-44 bg-surface-container-lowest border border-outline-variant rounded p-5 font-mono text-primary focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none resize-none transition-all" placeholder="e.g. CC1=C(C(=O)N(C1=O)C)C2=CC=C(C=C2)Cl">CN1C(=O)C(=C(C1=O)C)C2=CC=C(C=C2)Cl</textarea>
+<button class="w-full mt-6 py-4 bg-primary text-on-primary font-extrabold rounded shadow-md hover:shadow-lg hover:brightness-110 active:scale-[0.99] transition-all flex items-center justify-center gap-3">
+<span class="material-symbols-outlined">analytics</span>
+                        RUN MOLECULAR ANALYSIS
+                    </button>
+</div>
+<div class="clinical-card rounded-lg p-8 flex flex-col items-center">
+<div class="w-full flex justify-between items-center mb-8">
+<h3 class="text-xs font-bold text-on-surface-variant uppercase tracking-widest">2D Structure Preview</h3>
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-primary transition-colors">zoom_in</span>
+</div>
+<div class="relative w-full aspect-square max-w-[320px] bg-surface-container-lowest border border-surface-container-highest rounded-lg flex items-center justify-center p-10 overflow-hidden">
+<img class="w-full h-full object-contain mix-blend-multiply" data-alt="Technical 2D molecular structure diagram with teal and white atoms on a dark transparent background, high precision scientific rendering" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuEeYzyA9WCc58sss9G706R1GLXBBC_FWwVm1osVErWbYIXTdJ9JUBSKqn0hw4wlnGKWR5PacNTNVluITGdnOFBgENGrozm1M2WhwknNsZ1XjTRs6lDOoxGWVjFRWG7KUmUS269NB2dZaiIBRtH6zYk3DN6pG5HlGZqEUKW1rO2sH-DYCzNHgqhcmqImd_a3hphPaJFIVESylNNoFmxf-DJ_jzeysUfBRg2NZnHfJ_Bk6v64jjI6K7xSoFs9CEXxUL6Euvz60li7zn"/>
+</div>
+<div class="mt-8 flex gap-6 text-[11px] text-outline font-bold uppercase tracking-wider">
+<span>MW: <span class="text-on-surface">248.66 g/mol</span></span>
+<span>LogP: <span class="text-on-surface">2.14</span></span>
+</div>
+</div>
+</div>
+<!-- Right Panel: Results Dashboard -->
+<div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- 1. Drug Purpose -->
+<div class="clinical-card rounded-lg p-8 md:col-span-2 border-l-4 border-l-primary">
+<div class="flex items-start justify-between">
+<div>
+<h3 class="text-xs font-bold text-primary uppercase tracking-widest mb-5">Predicted Therapeutic Class</h3>
+<div class="flex flex-wrap gap-3">
+<span class="px-5 py-2.5 bg-primary/10 border border-primary/20 text-primary rounded font-bold text-sm flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                                    COX-2 Inhibitor
+                                </span>
+<span class="px-5 py-2.5 bg-surface-container-high border border-outline-variant text-on-surface-variant rounded font-bold text-sm">
+                                    Anti-inflammatory
+                                </span>
+<span class="px-5 py-2.5 bg-surface-container-high border border-outline-variant text-on-surface-variant rounded font-bold text-sm">
+                                    Non-steroidal
+                                </span>
+</div>
+</div>
+<div class="text-right">
+<div class="text-4xl font-headline font-extrabold text-on-surface">94.2<span class="text-primary text-base ml-1">%</span></div>
+<div class="text-[10px] text-outline uppercase font-extrabold tracking-widest mt-1">Confidence Score</div>
+</div>
+</div>
+</div>
+<!-- 2. Predicted Side Effects -->
+<div class="clinical-card rounded-lg p-8">
+<h3 class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-8">Side Effect Profile</h3>
+<div class="space-y-7">
+<div>
+<div class="flex justify-between text-xs font-bold mb-2.5">
+<span class="text-on-surface">Hepatotoxicity</span>
+<span class="text-error">82%</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-error rounded-full" style="width: 82%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-bold mb-2.5">
+<span class="text-on-surface">Nephrotoxicity</span>
+<span class="text-[#E2A000]">45%</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-[#E2A000] rounded-full" style="width: 45%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-bold mb-2.5">
+<span class="text-on-surface">Gastrointestinal</span>
+<span class="text-primary">12%</span>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 12%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- 3. Binding Risk Panel -->
+<div class="clinical-card rounded-lg p-8">
+<h3 class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-8">Binding Affinity (IC50)</h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded border border-surface-container-highest">
+<div>
+<div class="text-[10px] font-extrabold text-on-surface-variant uppercase tracking-widest">hERG</div>
+<div class="text-xl font-headline font-extrabold">8.4 <span class="text-xs text-outline font-normal">µM</span></div>
+</div>
+<span class="px-2 py-1 bg-error-container text-on-error-container text-[10px] font-black rounded uppercase tracking-tighter">High Risk</span>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded border border-surface-container-highest">
+<div>
+<div class="text-[10px] font-extrabold text-on-surface-variant uppercase tracking-widest">CYP3A4</div>
+<div class="text-xl font-headline font-extrabold">24.1 <span class="text-xs text-outline font-normal">µM</span></div>
+</div>
+<span class="px-2 py-1 bg-primary-container text-on-primary-container text-[10px] font-black rounded uppercase tracking-tighter">Safe</span>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded border border-surface-container-highest">
+<div>
+<div class="text-[10px] font-extrabold text-on-surface-variant uppercase tracking-widest">COX-2</div>
+<div class="text-xl font-headline font-extrabold">1.2 <span class="text-xs text-outline font-normal">nM</span></div>
+</div>
+<span class="px-2 py-1 bg-primary text-on-primary text-[10px] font-black rounded uppercase tracking-tighter">Target</span>
+</div>
+</div>
+</div>
+<!-- 4. SHAP Explanation -->
+<div class="clinical-card rounded-lg p-8 md:col-span-2">
+<div class="flex items-center gap-3 mb-8">
+<h3 class="text-xs font-bold text-on-surface-variant uppercase tracking-widest">Model Explanation (SHAP Value Distribution)</h3>
+<span class="material-symbols-outlined text-[16px] text-outline cursor-help" title="Shows features that contribute to the prediction">info</span>
+</div>
+<div class="space-y-6">
+<div class="flex items-center gap-6">
+<span class="text-xs font-bold text-on-surface w-40 truncate">Carbon-Chlorine Bond</span>
+<div class="flex-1 h-10 flex items-center bg-surface-container-lowest border border-surface-container-highest rounded overflow-hidden">
+<div class="h-full bg-primary/40 border-r-2 border-primary" style="width: 65%"></div>
+<div class="flex-1"></div>
+</div>
+<span class="text-xs text-primary font-black w-12 text-right">+0.42</span>
+</div>
+<div class="flex items-center gap-6">
+<span class="text-xs font-bold text-on-surface w-40 truncate">Methyl Group Presence</span>
+<div class="flex-1 h-10 flex items-center bg-surface-container-lowest border border-surface-container-highest rounded overflow-hidden">
+<div class="h-full bg-primary/20 border-r-2 border-primary/40" style="width: 25%"></div>
+<div class="flex-1"></div>
+</div>
+<span class="text-xs text-primary font-black w-12 text-right">+0.12</span>
+</div>
+<div class="flex items-center gap-6">
+<span class="text-xs font-bold text-on-surface w-40 truncate">Molecular Weight</span>
+<div class="flex-1 h-10 flex items-center justify-end bg-surface-container-lowest border border-surface-container-highest rounded overflow-hidden">
+<div class="flex-1"></div>
+<div class="h-full bg-error/20 border-l-2 border-error/40" style="width: 15%"></div>
+</div>
+<span class="text-xs text-error font-black w-12 text-right">-0.08</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest w-full py-16 px-8 border-t border-surface-container-highest">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-[1440px] mx-auto">
+<div>
+<div class="text-2xl font-extrabold text-primary mb-4 font-headline">DrugMirror</div>
+<p class="text-on-surface-variant text-sm leading-relaxed max-w-xs">Precision analytics for pharmaceutical drug discovery and toxicological safety assessment.</p>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="text-on-surface font-black text-xs uppercase tracking-widest mb-2">Legal &amp; Documentation</h4>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-sm font-medium" href="#">Privacy &amp; Data Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-sm font-medium" href="#">Terms of Clinical Use</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-sm font-medium" href="#">API Technical Docs</a>
+</div>
+<div class="flex flex-col items-start md:items-end">
+<div class="text-xs font-bold tracking-widest text-outline uppercase">DrugMirror © 2024</div>
+<div class="mt-6 flex gap-6">
+<span class="material-symbols-outlined text-outline hover:text-primary cursor-pointer transition-colors text-[24px]">hub</span>
+<span class="material-symbols-outlined text-outline hover:text-primary cursor-pointer transition-colors text-[24px]">science</span>
+<span class="material-symbols-outlined text-outline hover:text-primary cursor-pointer transition-colors text-[24px]">terminal</span>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
