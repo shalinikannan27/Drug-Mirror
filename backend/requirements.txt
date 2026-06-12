@@ -1,1 +1,11 @@
-
+fastapi
+uvicorn[standard]
+rdkit
+xgboost
+scikit-learn
+shap
+joblib
+numpy
+pandas
+python-multipart
+python-dotenv
