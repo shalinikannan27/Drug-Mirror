@@ -1,5 +1,51 @@
-_pycache_/
-*.pyc
-.env
+# ── Python ──────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+lib/
+lib64/
+
+# ── Virtual environments ─────────────────────────────────────────────────────
+.venv/
 venv/
+env/
+ENV/
+
+# ── Environment & secrets ────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ── ML model files (large binaries — share via GDrive / S3, not git) ────────
 models/*.pkl
+models/*.joblib
+models/*.h5
+models/*.pt
+models/*.pth
+# Keep the directory itself tracked
+!models/.gitkeep
+
+# ── IDE & OS ─────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# ── Test & coverage ──────────────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/

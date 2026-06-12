@@ -1,0 +1,9 @@
+# This file keeps the models/ directory tracked by git.
+# Place the following trained model files here to enable real predictions:
+#
+#   drugmirror_models.pkl   – dict mapping label names to sklearn estimators
+#   label_cols.pkl          – list of 12 side-effect category names
+#   feature_cols.pkl        – ordered list of training feature column names
+#
+# The backend will automatically detect these files on startup and switch
+# from MOCK mode to REAL prediction mode — no code changes required.
