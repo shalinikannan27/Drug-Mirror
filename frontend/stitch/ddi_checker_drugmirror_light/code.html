@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DDI Checker | DrugMirror</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "primary": "#1D9E75",
+              "on-primary": "#ffffff",
+              "secondary": "#0f172a",
+              "background": "#f8fafc",
+              "on-background": "#0f172a",
+              "surface": "#ffffff",
+              "on-surface": "#0f172a",
+              "surface-variant": "#f1f5f9",
+              "on-surface-variant": "#64748b",
+              "outline": "#e2e8f0",
+              "error": "#ef4444",
+              "on-error": "#ffffff",
+              "teal-accent": "#14b8a6"
+            },
+            "borderRadius": {
+              "DEFAULT": "4px",
+              "lg": "6px",
+              "xl": "8px",
+              "full": "9999px"
+            },
+            "fontFamily": {
+              "headline": ["Manrope", "sans-serif"],
+              "body": ["Manrope", "sans-serif"],
+              "label": ["Manrope", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .gradient-subtle {
+        background: linear-gradient(135deg, #1D9E75 0%, #14b8a6 100%);
+      }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body min-h-screen selection:bg-primary/20">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-outline">
+<div class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto">
+<div class="text-2xl font-headline font-extrabold tracking-tighter text-secondary">Drug<span class="text-primary">Mirror</span></div>
+<div class="hidden md:flex items-center gap-x-8 font-headline font-semibold text-sm">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Home</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Analyzer</a>
+<a class="text-primary border-b-2 border-primary pb-1" href="#">DDI Checker</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">About</a>
+</div>
+<button class="bg-secondary hover:bg-slate-800 text-white px-6 py-2 rounded-lg font-bold transition-all active:scale-95 duration-200 text-sm">
+            Analyze
+        </button>
+</div>
+</nav>
+<main class="pt-32 pb-20 px-6 max-w-[1440px] mx-auto">
+<!-- Hero Section -->
+<header class="mb-16 text-center md:text-left">
+<h1 class="text-5xl md:text-6xl font-headline font-extrabold tracking-tight mb-4 text-secondary">
+            DDI <span class="text-primary">Checker</span>
+</h1>
+<p class="text-on-surface-variant text-lg max-w-2xl font-medium leading-relaxed">
+            Utilize our proprietary Molecular Luminescence engine to predict drug-drug interactions with clinical-grade accuracy.
+        </p>
+</header>
+<!-- Input Section -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+<!-- Drug 1 Input -->
+<div class="bg-white border border-outline rounded-lg p-8 transition-all duration-300 shadow-sm">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">biotech</span>
+<label class="text-xs font-label font-bold tracking-widest uppercase text-on-surface-variant">Drug Molecule A</label>
+</div>
+<div class="relative">
+<textarea class="w-full h-32 bg-surface-variant border-none rounded-lg p-4 text-secondary font-mono text-sm focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-slate-400" placeholder="Enter SMILES sequence (e.g. CC1=C(C=C(C=C1)C(=O)NC2=CC=C(C=C2)CN3CCN(CC3)C)NC4=NC=CC(=N4)C5=CN=CC=C5)"></textarea>
+</div>
+</div>
+<!-- Drug 2 Input -->
+<div class="bg-white border border-outline rounded-lg p-8 transition-all duration-300 shadow-sm">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-teal-accent">science</span>
+<label class="text-xs font-label font-bold tracking-widest uppercase text-on-surface-variant">Drug Molecule B</label>
+</div>
+<div class="relative">
+<textarea class="w-full h-32 bg-surface-variant border-none rounded-lg p-4 text-secondary font-mono text-sm focus:ring-2 focus:ring-teal-accent/20 transition-all placeholder:text-slate-400" placeholder="Enter SMILES sequence (e.g. C1=CC(=C(C=C1C2=C(C=C3C(=C2)C(=CN3C4C(C(C(O4)CO)O)O)O)C(=O)N)O)O)"></textarea>
+</div>
+</div>
+</section>
+<!-- Action Button -->
+<div class="flex justify-center mb-24">
+<button class="gradient-subtle text-white px-12 py-5 rounded-lg text-lg font-headline font-bold shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all active:scale-95 group">
+<div class="flex items-center gap-3">
+                Check Interactions
+                <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">bolt</span>
+</div>
+</button>
+</div>
+<!-- Results Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
+<!-- Shared Protein Targets (Span 4) -->
+<div class="md:col-span-4 glass-card rounded-lg p-8 flex flex-col justify-between">
+<div>
+<h3 class="text-on-surface-variant text-xs font-label font-bold tracking-widest uppercase mb-6">Shared Protein Targets</h3>
+<div class="text-6xl font-headline font-extrabold text-secondary mb-2">14</div>
+<p class="text-on-surface-variant text-sm font-medium">Overlapping biological pathways identified.</p>
+</div>
+<div class="mt-8 flex gap-2">
+<div class="h-1.5 flex-1 bg-primary rounded-full"></div>
+<div class="h-1.5 flex-1 bg-primary/40 rounded-full"></div>
+<div class="h-1.5 flex-1 bg-primary/10 rounded-full"></div>
+</div>
+</div>
+<!-- Tanimoto Similarity (Span 4) -->
+<div class="md:col-span-4 glass-card rounded-lg p-8 relative overflow-hidden">
+<div class="relative z-10">
+<h3 class="text-on-surface-variant text-xs font-label font-bold tracking-widest uppercase mb-6">Structural Similarity</h3>
+<div class="text-6xl font-headline font-extrabold text-teal-accent mb-2">0.74</div>
+<p class="text-on-surface-variant text-sm font-medium">Tanimoto Coefficient (High Structural Affinity)</p>
+</div>
+<div class="absolute -bottom-10 -right-10 opacity-5">
+<span class="material-symbols-outlined text-[160px]" style="font-variation-settings: 'FILL' 1;">hexagon</span>
+</div>
+</div>
+<!-- Risk Level (Span 4) -->
+<div class="md:col-span-4 bg-white border border-error/10 rounded-lg p-8 flex flex-col items-center justify-center text-center shadow-sm">
+<div class="w-16 h-16 rounded-full bg-error/5 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-error text-3xl">warning</span>
+</div>
+<span class="px-4 py-1 bg-error text-white rounded-full text-[10px] font-bold uppercase tracking-widest mb-4">High Risk</span>
+<h3 class="text-2xl font-headline font-extrabold text-secondary">Potential Toxicity</h3>
+</div>
+<!-- Conflict Description (Span 7) -->
+<div class="md:col-span-7 glass-card rounded-lg p-10">
+<div class="flex items-center gap-4 mb-8">
+<span class="material-symbols-outlined text-primary p-3 bg-primary/5 rounded-lg">emergency_home</span>
+<h3 class="text-xl font-headline font-extrabold text-secondary">Conflict Analysis</h3>
+</div>
+<div class="space-y-6">
+<div class="flex gap-4">
+<div class="w-2 h-2 rounded-full bg-error mt-2.5"></div>
+<p class="text-on-surface text-lg leading-relaxed">
+                        Both drugs act as potent inhibitors of <span class="text-primary font-bold">CYP3A4</span>, potentially leading to toxic accumulation of Drug B in the bloodstream.
+                    </p>
+</div>
+<div class="flex gap-4">
+<div class="w-2 h-2 rounded-full bg-teal-accent mt-2.5"></div>
+<p class="text-on-surface text-lg leading-relaxed">
+                        Metabolic pathway interference detected at the <span class="text-teal-accent font-bold">P-glycoprotein</span> transport level.
+                    </p>
+</div>
+</div>
+</div>
+<!-- Editorial Verdict (Span 5) -->
+<div class="md:col-span-5 bg-secondary rounded-lg p-10 flex flex-col text-white">
+<h3 class="text-slate-400 text-[10px] font-label font-bold tracking-[0.2em] uppercase mb-8">Editorial Verdict</h3>
+<blockquote class="text-xl italic font-medium mb-8 border-l-2 border-primary pl-6 leading-relaxed">
+                "Concomitant administration is strictly contraindicated. The overlapping metabolic inhibition profiles present a severe risk of adverse hepatic events."
+            </blockquote>
+<div class="mt-auto flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-slate-800 flex items-center justify-center overflow-hidden border border-slate-700">
+<img class="w-full h-full object-cover" data-alt="portrait of a female medical researcher" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEd0tnROiia_91CrzZwYikbKHysYaDKrvrVXqh4We39XQ_HK-8Rby66XkdoUuU9mKQN9Q3Ca4UQfGaVGDnH_6_MBBM3YrFEhOBcRwzy2VYbHFY5wecVJM6lZrKSCq36E9OFh8roKPBUPfoR1xvRlUokBiXTFJ4XxYS911OpxU-6J-aRYr6jaRvuhisKd6LgU6J_0gedygAiklFIuW3OzYuLQ4chowPpQJsquuWdfj9ZpQOAfLt-iPqGIjL4RuQm635WcH9mmXoNuqs"/>
+</div>
+<div>
+<div class="text-sm font-bold">Dr. Aris Thorne</div>
+<div class="text-xs text-slate-400">Senior Pharmacologist, DrugMirror</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-white w-full py-12 px-8 border-t border-outline">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[1440px] mx-auto">
+<div>
+<div class="text-xl font-extrabold text-secondary mb-2">DrugMirror</div>
+<p class="text-primary text-[10px] tracking-widest uppercase font-bold mb-4">Molecular Luminescence</p>
+<div class="text-sm font-medium text-on-surface-variant">
+                DrugMirror © 2024
+            </div>
+</div>
+<div class="flex flex-col gap-3">
+<a class="text-on-surface-variant hover:text-primary transition-colors text-sm font-medium" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-sm font-medium" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-sm font-medium" href="#">API Documentation</a>
+</div>
+<div class="flex flex-col items-start md:items-end justify-center">
+<div class="text-on-surface-variant text-xs mb-4 font-semibold uppercase tracking-wider">Connect with our research team</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer">share</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer">mail</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer">database</span>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

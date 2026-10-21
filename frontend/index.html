@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>DrugMirror | Safety Profiling & Risk Prediction</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary": "#1D9E75",
+            "on-primary": "#ffffff",
+            "primary-container": "#D1F3E9",
+            "on-primary-container": "#002116",
+            "secondary": "#4E635C",
+            "on-secondary": "#ffffff",
+            "tertiary": "#3D6373",
+            "on-tertiary": "#ffffff",
+            "background": "#FBFDFB",
+            "on-background": "#191C1B",
+            "surface": "#FBFDFB",
+            "on-surface": "#191C1B",
+            "surface-variant": "#DBE5E0",
+            "on-surface-variant": "#3F4945",
+            "outline": "#707975",
+            "outline-variant": "#BFC9C4",
+            "surface-container-low": "#F1F5F3",
+            "surface-container": "#ECF1EE",
+            "surface-container-high": "#E6EBE8",
+            "surface-container-highest": "#E1E6E2"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "fontFamily": {
+            "headline": ["Manrope", "sans-serif"],
+            "body": ["Inter", "sans-serif"],
+            "label": ["Inter", "sans-serif"]
+          }
+        },
+      },
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #FBFDFB;
+      color: #191C1B;
+    }
+
+    .font-headline {
+      font-family: 'Manrope', sans-serif;
+    }
+
+    .glass-nav {
+      backdrop-filter: blur(32px);
+    }
+
+    .molecular-bg {
+      background-image: radial-gradient(circle at 2px 2px, rgba(29, 158, 117, 0.03) 1px, transparent 0);
+      background-size: 40px 40px;
+    }
+
+    .glow-soft {
+      box-shadow: 0 4px 30px rgba(29, 158, 117, 0.05);
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .clinical-card {
+      background: #FFFFFF;
+      border: 1px solid #E4E6E2;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+  </style>
+</head>
+
+<body class="bg-background text-on-background selection:bg-primary/20">
+
+  <!-- TopNavBar -->
+  <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-lg border-b border-outline-variant shadow-sm">
+    <div class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto">
+      <div class="text-2xl font-extrabold tracking-tight text-primary font-headline cursor-pointer"
+        onclick="window.location.href='index.html'">DrugMirror</div>
+      <div class="hidden md:flex items-center space-x-8 font-headline font-bold tracking-tight">
+        <a class="text-primary border-b-2 border-primary pb-1" href="index.html">Home</a>
+        <a class="text-on-surface-variant hover:text-primary transition-colors" href="binding-affinity.html">Binding
+          Affinity</a>
+        <a class="text-on-surface-variant hover:text-primary transition-colors" href="side-effects.html">Side
+          Effects</a>
+        <a class="text-on-surface-variant hover:text-primary transition-colors" href="ddi-checker.html">DDI Checker</a>
+        <a class="text-on-surface-variant hover:text-primary transition-colors" href="real-world-data.html">Safety
+          Signals</a>
+      </div>
+      <div class="flex items-center space-x-4">
+        <button onclick="window.location.href='binding-affinity.html'"
+          class="bg-primary text-on-primary px-6 py-2 rounded-md font-bold text-sm active:scale-95 transition-all duration-200 shadow-sm hover:brightness-110">
+          Get Started
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="relative min-h-screen pt-20 overflow-hidden">
+    <!-- Background Molecular Atmosphere -->
+    <div class="absolute inset-0 z-0 pointer-events-none">
+      <div class="absolute top-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full bg-primary/5 blur-[120px]"></div>
+      <div class="absolute bottom-[-5%] left-[-5%] w-[40%] h-[40%] rounded-full bg-tertiary/5 blur-[100px]"></div>
+      <div class="molecular-bg absolute inset-0 opacity-100"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section
+      class="relative z-10 max-w-[1440px] mx-auto px-8 pt-16 md:pt-24 pb-12 flex flex-col md:flex-row items-center">
+      <div class="w-full md:w-1/2 text-left space-y-8">
+        <h1
+          class="text-5xl md:text-7xl font-headline font-extrabold tracking-tighter leading-[1.05] text-on-background">
+          Predict Drug Risks <br />
+          <span class="text-primary">With Transparent</span> Safety Data
+        </h1>
+        <p class="text-lg md:text-xl text-on-surface-variant font-body max-w-xl leading-relaxed">
+          DrugMirror is a research tool combining binding affinity, side-effect, drug-interaction, and real-world
+          adverse-event data for existing, validated drugs.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <button onclick="window.location.href='binding-affinity.html'"
+            class="bg-primary text-on-primary px-8 py-4 rounded-lg font-bold text-lg hover:shadow-lg transition-all active:scale-95 flex items-center group">
+            Analyze your Drug
+            <span
+              class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 3D Molecule Visual -->
+      <div class="w-full md:w-1/2 mt-12 md:mt-0 relative flex justify-center items-center">
+        <div class="relative w-full max-w-lg aspect-square">
+          <div class="absolute inset-0 bg-primary/5 rounded-full blur-[100px]"></div>
+          <!-- Mock Molecule Component -->
+          <div
+            class="relative z-10 w-full h-full p-8 rounded-full border border-outline-variant/30 bg-white/40 backdrop-blur-md flex items-center justify-center glow-soft shadow-inner">
+            <img alt="3D Molecule Model" class="w-full h-full object-cover rounded-full opacity-90" src="drug.png" />
+            <!-- Molecule Image -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+    <!-- 4 CTA Section -->
+    <section id="features" class="relative z-10 max-w-[1440px] mx-auto px-8 py-20">
+      <div class="text-center mb-16">
+        <h2 class="font-headline text-3xl md:text-4xl font-extrabold text-on-background">Explore Computational Modules
+        </h2>
+        <p class="text-on-surface-variant mt-2 font-medium max-w-xl mx-auto">Access individual diagnostic pipelines to
+          inspect structural descriptors, target binding, and safety outcomes.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <!-- CTA 1: Binding Affinity -->
+        <div class="clinical-card p-8 rounded-2xl flex flex-col justify-between hover:shadow-md transition-shadow">
+          <div class="space-y-4">
+            <span class="material-symbols-outlined text-4xl text-primary">biotech</span>
+            <h3 class="text-2xl font-headline font-extrabold">Binding Affinity</h3>
+            <p class="text-on-surface-variant leading-relaxed font-medium">
+              Analyze predicted binding affinity values (pKd) for validated drugs against key therapeutic targets (hERG,
+              CYP3A4, COX-2). View real validation metrics in our performance panel.
+            </p>
+          </div>
+          <div class="mt-8">
+            <button onclick="window.location.href='binding-affinity.html'"
+              class="bg-primary text-on-primary px-6 py-3 rounded-lg font-bold hover:brightness-110 active:scale-95 transition-all w-full md:w-auto">
+              Open Binding Affinity
+            </button>
+          </div>
+        </div>
+
+        <!-- CTA 2: Side Effects -->
+        <div class="clinical-card p-8 rounded-2xl flex flex-col justify-between hover:shadow-md transition-shadow">
+          <div class="space-y-4">
+            <span class="material-symbols-outlined text-4xl text-primary font-bold">medical_services</span>
+            <h3 class="text-2xl font-headline font-extrabold">Side Effects</h3>
+            <p class="text-on-surface-variant leading-relaxed font-medium">
+              Predict adverse outcomes across 20 retained SIDER MedDRA categories. Review probability estimates paired
+              with transparent model confidence tags.
+            </p>
+          </div>
+          <div class="mt-8">
+            <button onclick="window.location.href='side-effects.html'"
+              class="bg-primary text-on-primary px-6 py-3 rounded-lg font-bold hover:brightness-110 active:scale-95 transition-all w-full md:w-auto">
+              Open Side Effects
+            </button>
+          </div>
+        </div>
+
+        <!-- CTA 3: DDI Checker -->
+        <div class="clinical-card p-8 rounded-2xl flex flex-col justify-between hover:shadow-md transition-shadow">
+          <div class="space-y-4">
+            <span class="material-symbols-outlined text-4xl text-tertiary">compare_arrows</span>
+            <h3 class="text-2xl font-headline font-extrabold">DDI Checker</h3>
+            <p class="text-on-surface-variant leading-relaxed font-medium">
+              Check drug-drug interactions between two molecular structures. Estimates similarity coefficients and
+              alerts you of potential severity conflicts based on DDInter profiles.
+            </p>
+          </div>
+          <div class="mt-8">
+            <button onclick="window.location.href='ddi-checker.html'"
+              class="bg-primary text-on-primary px-6 py-3 rounded-lg font-bold hover:brightness-110 active:scale-95 transition-all w-full md:w-auto">
+              Open DDI Checker
+            </button>
+          </div>
+        </div>
+
+        <!-- CTA 4: Real-World Data (FAERS) -->
+        <div class="clinical-card p-8 rounded-2xl flex flex-col justify-between hover:shadow-md transition-shadow">
+          <div class="space-y-4">
+            <span class="material-symbols-outlined text-4xl text-tertiary">database</span>
+            <h3 class="text-2xl font-headline font-extrabold">Real-World Data (FAERS)</h3>
+            <p class="text-on-surface-variant leading-relaxed font-medium">
+              Inspect safety event signals using Proportional Reporting Ratio (PRR) scores calculated from the FDA
+              adverse event database, and capped based on cross-validated AUC benchmarks.
+            </p>
+          </div>
+          <div class="mt-8">
+            <button onclick="window.location.href='real-world-data.html'"
+              class="bg-primary text-on-primary px-6 py-3 rounded-lg font-bold hover:brightness-110 active:scale-95 transition-all w-full md:w-auto">
+              Open Real-World Data
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Methodology & Confidence System explanation -->
+    <section class="relative z-10 max-w-[1440px] mx-auto px-8 pb-24">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6">
+          <h2 class="font-headline text-3xl md:text-4xl font-extrabold text-on-background">Rigorous &amp; Transparent
+            Scoring</h2>
+          <p class="text-on-surface-variant leading-relaxed font-medium">
+            We run Morgan fingerprints (radius 2, 2048-bit) and XGBoost models under a multi-level confidence scoring
+            architecture (High, Medium, and Low).
+          </p>
+          <p class="text-on-surface-variant leading-relaxed font-medium">
+            Confidence tags represent both model reliability (measured cross-validation metrics) and compound validity.
+            Inputs outside our core validated drug datasets are automatically flagged as low-confidence.
+          </p>
+        </div>
+        <div class="bg-white p-8 rounded-2xl border border-outline-variant shadow-sm space-y-6">
+          <div class="flex items-start gap-4">
+            <span
+              class="px-2.5 py-1 bg-primary-container text-on-primary-container text-xs font-bold rounded">High</span>
+            <div>
+              <h4 class="font-headline font-bold text-sm">Validated Compound</h4>
+              <p class="text-xs text-on-surface-variant mt-1">Predictions made on fully documented therapeutics with
+                deep training overlap.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 border-t border-outline-variant/30 pt-6">
+            <span class="px-2.5 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold rounded">Medium</span>
+            <div>
+              <h4 class="font-headline font-bold text-sm">High Structural Overlap</h4>
+              <p class="text-xs text-on-surface-variant mt-1">Predictions on compounds structurally analogous to SIDER
+                and Davis profiles.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 border-t border-outline-variant/30 pt-6">
+            <span class="px-2.5 py-1 bg-error-container text-on-error-container text-xs font-bold rounded">Low</span>
+            <div>
+              <h4 class="font-headline font-bold text-sm">Low Reliability / Capped Categories</h4>
+              <p class="text-xs text-on-surface-variant mt-1">Target models displaying low predictive power (e.g. AUC
+                below 0.60), or non-standard compound structures.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="w-full py-12 px-8 border-t border-outline-variant bg-surface-container-low">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[1440px] mx-auto">
+      <div class="space-y-4">
+        <div class="text-xl font-extrabold text-primary mb-2 font-headline">DrugMirror</div>
+        <p class="font-body text-sm tracking-wide text-on-surface-variant max-w-xs font-medium">
+          A research tool for safety profiling and risk prediction of validated drug compounds.
+        </p>
+        <div class="font-body text-xs tracking-wide text-outline font-bold">DrugMirror © 2026</div>
+      </div>
+      <div class="flex flex-col space-y-4">
+        <h4 class="text-sm font-extrabold text-primary uppercase tracking-widest">Platform</h4>
+        <a class="font-body text-sm tracking-wide text-on-surface-variant hover:text-primary transition-colors font-medium"
+          href="binding-affinity.html">Binding Affinity</a>
+        <a class="font-body text-sm tracking-wide text-on-surface-variant hover:text-primary transition-colors font-medium"
+          href="side-effects.html">Side Effects</a>
+        <a class="font-body text-sm tracking-wide text-on-surface-variant hover:text-primary transition-colors font-medium"
+          href="ddi-checker.html">DDI Checker</a>
+        <a class="font-body text-sm tracking-wide text-on-surface-variant hover:text-primary transition-colors font-medium"
+          href="real-world-data.html">Real-World Data</a>
+      </div>
+      <div class="flex flex-col space-y-4">
+        <h4 class="text-sm font-extrabold text-primary uppercase tracking-widest">Legal &amp; Scope</h4>
+        <p class="font-body text-xs tracking-wide text-on-surface-variant font-medium leading-relaxed">
+          This tool is a research prototype. It does not predict outcomes for novel compounds and is not a substitute
+          for clinical or regulatory safety assessment.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const API_BASE = 'http://127.0.0.1:8000';
+    (async () => {
+      const dot = document.getElementById('api-dot');
+      const text = document.getElementById('api-status-text');
+      if (!dot || !text) return;
+      try {
+        const res = await fetch(`${API_BASE}/health`, { signal: AbortSignal.timeout(3000) });
+        if (res.ok) {
+          dot.classList.replace('bg-gray-300', 'bg-green-500');
+          text.textContent = 'Backend Online';
+          text.classList.replace('text-secondary', 'text-green-600');
+        } else {
+          throw new Error('not ok');
+        }
+      } catch {
+        dot.classList.replace('bg-gray-300', 'bg-red-400');
+        text.textContent = 'Backend Offline';
+        text.classList.replace('text-secondary', 'text-red-500');
+      }
+    })();
+  </script>
+</body>
+
+</html>
